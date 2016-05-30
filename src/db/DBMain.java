@@ -13,7 +13,6 @@ public class DBMain {
         Connection dbConnection = DBUtilsSample.getDBConnection();
 
 
-        
         Statement statement = dbConnection.createStatement();
 
 
