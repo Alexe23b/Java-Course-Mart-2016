@@ -43,11 +43,11 @@ public class SetContactData {
         in = new Scanner(System.in);
         System.out.println("Введите дату рождения dd.MM.yyyy");
         String date = in.next("[0-9]{2}.[0-9]{2}.[0-9]{4}");
-        try {
-            birthday = new SimpleDateFormat("dd.MM.yyyy").parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            birthday = new SimpleDateFormat("dd.MM.yyyy").parse(date);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 
         in = new Scanner(System.in);
         System.out.println("Введите страну проживания");
