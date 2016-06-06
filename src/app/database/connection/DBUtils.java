@@ -21,8 +21,7 @@ public class DBUtils {
             url = "jdbc:postgresql://localhost:5432/tac_addressbook";
             login = "postgres";
             password = "postgres_password";
-        }
-        else if (dbType == 1){
+        } else if (dbType == 1) {
             dbDriver = "com.mysql.jdbc.Driver";
             url = "jdbc:mysql://localhost:3306/MyAddressBook";
             login = "root";
@@ -55,10 +54,10 @@ public class DBUtils {
         return connection;
     }
 
-    public static void createAddressTable(Connection dbConnection) {
+    public static void createPhonesTable(Connection dbConnection) {
         Statement statement = null;
 
-        String createTableSQL = "CREATE TABLE Phones("
+        String createTableSQL = "CREATE TABLE phones("
                 + "idphone INTEGER AUTO_INCREMENT, "
                 + "phone_number VARCHAR(20) NOT NULL, "
                 + "idcontact INTEGER NOT NULL, "
@@ -82,5 +81,42 @@ public class DBUtils {
             }
         }
     }
+
+    public static int getNumberRows(Connection dbConnection, String tableName) {
+        Statement statement = null;
+
+        String getNumRowsAddress = "SELECT COUNT(*) FROM " + tableName;
+        int quantityRows = -1;
+        try {
+            statement = dbConnection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(getNumRowsAddress);
+            if (resultSet.next()) {
+
+                quantityRows = resultSet.getInt(1);
+            }
+
+            //System.out.println("Количество строк в таблице 'Address' = " + quantityRows+";");
+
+        } catch (
+                SQLException e
+                )
+
+        {
+            System.out.println(e.getMessage());
+        } finally
+
+        {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return (quantityRows);
+    }
+
 
 }

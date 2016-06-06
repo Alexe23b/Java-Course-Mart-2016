@@ -34,8 +34,26 @@ public class DBMain {
 
         Connection dbConnection = DBUtils.getDBConnection(dbType);
 
-        DBUtils.createAddressTable(dbConnection);
+        //DBUtils.createPhonesTable(dbConnection);
+        int quantityRowsAddress = DBUtils.getNumberRows(dbConnection, "address");
+        System.out.println("Количество строк в таблице 'Address' = " + quantityRowsAddress+";");
 
+        int quantityRowsContacts = DBUtils.getNumberRows(dbConnection, "contacts");
+        System.out.println("Количество строк в таблице 'Contacts' = " + quantityRowsContacts+";");
+
+        int quantityRowsEmails = DBUtils.getNumberRows(dbConnection, "emails");
+        System.out.println("Количество строк в таблице 'Emails' = " + quantityRowsEmails+";");
+
+        int quantityRowsPhones = DBUtils.getNumberRows(dbConnection, "phones");
+        System.out.println("Количество строк в таблице 'Phones' = " + quantityRowsPhones+";");
+
+        int quantityRowsPhoneToContact = DBUtils.getNumberRows(dbConnection, "phonetocontact");
+        System.out.println("Количество строк в таблице 'PhoneToContact' = " + quantityRowsPhoneToContact+";");
+
+
+        if (dbConnection != null) {
+            dbConnection.close();
+        }
     }
 
 }
