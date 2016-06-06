@@ -10,14 +10,26 @@ import java.util.Map;
  * Created by mda on 5/23/16.
  */
 public class DBUtils {
+    static String dbDriver;
+    static String url;
+    static String login;
+    static String password;
 
-    public static Connection getDBConnection(){
+    public static Connection getDBConnection(int dbType) {
+        if (dbType == 2) {
+            dbDriver = "org.postgresql.Driver";
+            url = "jdbc:postgresql://localhost:5432/tac_addressbook";
+            login = "postgres";
+            password = "postgres_password";
+        }
+        else if (dbType == 1){
+            dbDriver = "com.mysql.jdbc.Driver";
+            url = "jdbc:mysql://localhost:3306/MyAddressBook";
+            login = "root";
+            password = "1608";
+        }
 
-        String urlPostgress = "jdbc:postgresql://localhost:5432/tac_addressbook";
-        String login = "postgres";
-        String password = "postgres_password";
-
-        return getDBConnection("org.postgresql.Driver", urlPostgress, login, password);
+        return getDBConnection(dbDriver, url, login, password);
 
 
 //        return getDBConnection("com.mysql.jdbc.Driver", "jdbc:mysql://hostname:port/dbname","username", "password");
@@ -46,22 +58,18 @@ public class DBUtils {
     public static void createAddressTable(Connection dbConnection) {
         Statement statement = null;
 
-        String createTableSQL = "CREATE TABLE address("
-                + "address_id INTEGER NOT NULL, "
-                + "country VARCHAR(30) NOT NULL, "
-                + "city VARCHAR(20) NOT NULL, "
-                + "street VARCHAR(250) NOT NULL, "
-                + "house_number INTEGER NOT NULL, "
-                + "house_suffix VARCHAR(20) NOT NULL, "
-                + "post_code INTEGER NOT NULL, "
-                + "PRIMARY KEY (address_id) "
+        String createTableSQL = "CREATE TABLE Phones("
+                + "idphone INTEGER AUTO_INCREMENT, "
+                + "phone_number VARCHAR(20) NOT NULL, "
+                + "idcontact INTEGER NOT NULL, "
+                + "PRIMARY KEY (idphone) "
                 + ")";
 
         try {
             statement = dbConnection.createStatement();
             // выполнить SQL запрос
             statement.execute(createTableSQL);
-            System.out.println("Table \"Address\" is created!");
+            System.out.println("Table \"Phones\" is created!");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {

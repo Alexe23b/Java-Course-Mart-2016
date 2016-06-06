@@ -10,7 +10,7 @@ import java.sql.Connection;
 public class App {
     public static void main(String[] args) {
         System.out.println("Start");
-        Connection dbConnection = DBUtils.getDBConnection();
-        DBUtils.createAddressTable(dbConnection);
+        //Connection dbConnection = DBUtils.getDBConnection();
+        //DBUtils.createAddressTable(dbConnection);
     }
 }
