@@ -35,7 +35,7 @@ public class SetContactData {
     //static String photoPath;
     static Date birthday;
 
-    public static String manualInputData(Connection dbConnection) {
+    public static void manualInputData(Connection dbConnection) {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Введите имя контакта");
@@ -108,16 +108,34 @@ public class SetContactData {
 
 
         Statement statement = null;
-        String idAddress = String.valueOf(DBUtils.getNumberRows(dbConnection, "address") + 1);
 
-        String address = "INSERT INTO address VALUES ('" + idAddress + "','"
-                + country + "','" + city + "','" + street + "','"
-                + houseNumber + "','" + houseSuffix + "','" + apartment + "','"
-                + postCode + "');";
+
+
+
+
         try {
             statement = dbConnection.createStatement();
-            statement.execute(address);
+            String idAddress = String.valueOf(DBUtils.getNumberRows(dbConnection, "address") + 1);
+
+            String address_record = "INSERT INTO address VALUES ('" + idAddress + "','"
+                    + country + "','" + city + "','" + street + "','"
+                    + houseNumber + "','" + houseSuffix + "','" + apartment + "','"
+                    + postCode + "');";
+
+            statement.execute(address_record);
             System.out.println("Пишем в таблицу Address, idAddress =" + idAddress);
+
+            for (String phone: phones){
+                String idPhone = String.valueOf(DBUtils.getNumberRows(dbConnection, "phones") + 1);
+                String phone_record = "INSERT INTO phones VALUES ('" + idPhone + "','"
+                        + phone + "');";
+                statement.execute(phone_record);
+                System.out.println("Пишем в таблицу Phones, idPhone =" + idPhone);
+            }
+
+
+
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
@@ -130,8 +148,6 @@ public class SetContactData {
             }
         }
 
-
-            return address;
-        }
-
     }
+
+}
