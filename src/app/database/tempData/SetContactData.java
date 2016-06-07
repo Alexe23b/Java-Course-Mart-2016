@@ -46,8 +46,8 @@ public class SetContactData {
         lastName = in.nextLine();
 
         in = new Scanner(System.in);
-        System.out.println("Введите дату рождения dd.MM.yyyy");
-        String date = in.next("[0-9]{2}.[0-9]{2}.[0-9]{4}");
+        System.out.println("Введите дату рождения yyyy.MM.dd");
+        String birthday = in.next("[0-9]{4}.[0-9]{2}.[0-9]{2}");
 //        try {
 //            birthday = new SimpleDateFormat("dd.MM.yyyy").parse(date);
 //        } catch (ParseException e) {
@@ -110,31 +110,47 @@ public class SetContactData {
         Statement statement = null;
 
 
-
-
-
         try {
             statement = dbConnection.createStatement();
-            String idAddress = String.valueOf(DBUtils.getNumberRows(dbConnection, "address") + 1);
 
-            String address_record = "INSERT INTO address VALUES ('" + idAddress + "','"
-                    + country + "','" + city + "','" + street + "','"
-                    + houseNumber + "','" + houseSuffix + "','" + apartment + "','"
-                    + postCode + "');";
+            String address_record = "INSERT INTO address (`country`, `city`, `street`, `house`, `suffix`, `appartment`, `postcode`) " +
+                    "VALUES ('" + country + "','" + city + "','" + street + "','"
+                    + houseNumber + "','" + houseSuffix + "','" + apartment + "','" + postCode + "');";
 
             statement.execute(address_record);
+
+            long idAddr = ((com.mysql.jdbc.Statement) statement).getLastInsertID();
+            String idAddress = String.valueOf(idAddr);
+
             System.out.println("Пишем в таблицу Address, idAddress =" + idAddress);
 
-            for (String phone: phones){
-                String idPhone = String.valueOf(DBUtils.getNumberRows(dbConnection, "phones") + 1);
-                String phone_record = "INSERT INTO phones VALUES ('" + idPhone + "','"
-                        + phone + "');";
+
+            String contact_record = "INSERT INTO contacts (`name`, `surname`, `dateofbirth`, `pathtophoto`, `idaddress`, `uid`)" +
+                    "VALUES ('" + firstName + "','" + lastName + "','" + birthday + "','Path to photo','" + idAddress + "','UID');";
+
+            statement.execute(contact_record);
+
+            long idCont = ((com.mysql.jdbc.Statement) statement).getLastInsertID();
+            String idContact = String.valueOf(idCont);
+
+            for (String phone : phones) {
+
+                String phone_record = "INSERT INTO phones (`phonenumber`) VALUES ('" + phone + "');";
                 statement.execute(phone_record);
-                System.out.println("Пишем в таблицу Phones, idPhone =" + idPhone);
+
+                long idPhon = ((com.mysql.jdbc.Statement) statement).getLastInsertID();
+                String idPhone = String.valueOf(idPhon);
+
+                String phonetocontact_record = "INSERT INTO phonetocontact VALUES ('" + idPhone + "','" + idContact + "');";
+                statement.execute(phonetocontact_record);
             }
 
+            for (String email : emails) {
+                String email_record = "INSERT INTO emails (`email`,`idcontact`) VALUES ('" + email + "','" + idContact + "');";
+                statement.execute(email_record);
+            }
 
-
+            System.out.println("Все ОК, контакт добавден! " + idContact);
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
