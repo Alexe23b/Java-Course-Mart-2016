@@ -36,9 +36,10 @@ public class DBMain {
         Connection dbConnection = DBUtils.getDBConnection(dbType);
 
         //DBUtils.createPhonesTable(dbConnection);
+        DBUtils.addContact(dbConnection);
 
-        String inputData = SetContactData.manualInputData(dbConnection);
-        System.out.println("Адрес контакта = " + inputData);
+//        String inputData = SetContactData.manualInputData(dbConnection);
+//        System.out.println("Адрес контакта = " + inputData);
 //        int quantityRowsAddress = DBUtils.getNumberRows(dbConnection, "address");
 //        System.out.println("Количество строк в таблице 'Address' = " + quantityRowsAddress+";");
 

@@ -1,10 +1,13 @@
 package app.database.connection;
 
+import app.database.tempData.SetContactData;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Created by mda on 5/23/16.
@@ -118,5 +121,25 @@ public class DBUtils {
         return (quantityRows);
     }
 
+    public static void addContact(Connection dbConnection){
+        System.out.println("Введите способ ввода данных (1 - с клавиатуры, 2 - из файла)");
+        Scanner in = new Scanner(System.in);
+        int how = in.nextInt();
+        int check = 0;
+        while (check != 1) {
+            if (how == 1) {
+                check = 1;
+                SetContactData.manualInputData(dbConnection);
+            } else if (how == 2) {
+                check = 1;
+                System.out.println("Извините ввод из файла пока не работает");
+            } else {
+                System.out.println("Вы ввели неверное число. Введите 1 или 2 (1 - с клавиатуры, 2 - из файла)");
+                in = new Scanner(System.in);
+                how = in.nextInt();
+            }
+        }
+
+    }
 
 }

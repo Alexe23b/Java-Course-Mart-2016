@@ -4,6 +4,8 @@ package app.database.tempData;
 import app.database.connection.DBUtils;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class SetContactData {
     static String street;
     static String houseNumber;
     static String houseSuffix;
-    static String  apartment;
+    static String apartment;
     static String postCode;
 
     static List<String> phones = new ArrayList<>();
@@ -104,22 +106,32 @@ public class SetContactData {
             }
         }
 
-//        System.out.println("contact name: " + firstName + " " + lastName);
-//        System.out.println("date of birth: " + date);
-//        System.out.println("address: " + country + ", city " + city + ", street " + street + ", house " + houseNumber + " " + houseSuffix + ", app " + apartment);
-//        System.out.println("phones: " + phones);
-//        System.out.println("e-mails: " + emails);
 
-        String idAddress = String.valueOf(DBUtils.getNumberRows(dbConnection, "address")+1);
+        Statement statement = null;
+        String idAddress = String.valueOf(DBUtils.getNumberRows(dbConnection, "address") + 1);
 
-        String address = "INSERT INTO address VALUES ('"+ idAddress + "','" + country + "','" + city + "','" + street + "','" + houseNumber + "','" + houseSuffix+"','"+apartment+"','"+postCode+"');";
+        String address = "INSERT INTO address VALUES ('" + idAddress + "','"
+                + country + "','" + city + "','" + street + "','"
+                + houseNumber + "','" + houseSuffix + "','" + apartment + "','"
+                + postCode + "');";
+        try {
+            statement = dbConnection.createStatement();
+            statement.execute(address);
+            System.out.println("Пишем в таблицу Address, idAddress =" + idAddress);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
-        return address;
+
+            return address;
+        }
+
     }
-//    public static String addToTable(String info) {
-
-
-//        return resultString;
-//    }
-
-}
