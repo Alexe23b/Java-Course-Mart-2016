@@ -54,33 +54,33 @@ public class DBUtils {
         return connection;
     }
 
-    public static void createPhonesTable(Connection dbConnection) {
-        Statement statement = null;
-
-        String createTableSQL = "CREATE TABLE phones("
-                + "idphone INTEGER AUTO_INCREMENT, "
-                + "phone_number VARCHAR(20) NOT NULL, "
-                + "idcontact INTEGER NOT NULL, "
-                + "PRIMARY KEY (idphone) "
-                + ")";
-
-        try {
-            statement = dbConnection.createStatement();
-            // выполнить SQL запрос
-            statement.execute(createTableSQL);
-            System.out.println("Table \"Phones\" is created!");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+//    public static void createPhonesTable(Connection dbConnection) {
+//        Statement statement = null;
+//
+//        String createTableSQL = "CREATE TABLE phones("
+//                + "idphone INTEGER AUTO_INCREMENT, "
+//                + "phone_number VARCHAR(20) NOT NULL, "
+//                + "idcontact INTEGER NOT NULL, "
+//                + "PRIMARY KEY (idphone) "
+//                + ")";
+//
+//        try {
+//            statement = dbConnection.createStatement();
+//            // выполнить SQL запрос
+//            statement.execute(createTableSQL);
+//            System.out.println("Table \"Phones\" is created!");
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        } finally {
+//            if (statement != null) {
+//                try {
+//                    statement.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
 
     public static int getNumberRows(Connection dbConnection, String tableName) {
         Statement statement = null;

@@ -1,6 +1,7 @@
 package app.database;
 
 import app.database.connection.DBUtils;
+import app.database.tempData.SetContactData;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -35,20 +36,23 @@ public class DBMain {
         Connection dbConnection = DBUtils.getDBConnection(dbType);
 
         //DBUtils.createPhonesTable(dbConnection);
-        int quantityRowsAddress = DBUtils.getNumberRows(dbConnection, "address");
-        System.out.println("Количество строк в таблице 'Address' = " + quantityRowsAddress+";");
 
-        int quantityRowsContacts = DBUtils.getNumberRows(dbConnection, "contacts");
-        System.out.println("Количество строк в таблице 'Contacts' = " + quantityRowsContacts+";");
+        String inputData = SetContactData.manualInputData(dbConnection);
+        System.out.println("Адрес контакта = " + inputData);
+//        int quantityRowsAddress = DBUtils.getNumberRows(dbConnection, "address");
+//        System.out.println("Количество строк в таблице 'Address' = " + quantityRowsAddress+";");
 
-        int quantityRowsEmails = DBUtils.getNumberRows(dbConnection, "emails");
-        System.out.println("Количество строк в таблице 'Emails' = " + quantityRowsEmails+";");
-
-        int quantityRowsPhones = DBUtils.getNumberRows(dbConnection, "phones");
-        System.out.println("Количество строк в таблице 'Phones' = " + quantityRowsPhones+";");
-
-        int quantityRowsPhoneToContact = DBUtils.getNumberRows(dbConnection, "phonetocontact");
-        System.out.println("Количество строк в таблице 'PhoneToContact' = " + quantityRowsPhoneToContact+";");
+//        int quantityRowsContacts = DBUtils.getNumberRows(dbConnection, "contacts");
+//        System.out.println("Количество строк в таблице 'Contacts' = " + quantityRowsContacts+";");
+//
+//        int quantityRowsEmails = DBUtils.getNumberRows(dbConnection, "emails");
+//        System.out.println("Количество строк в таблице 'Emails' = " + quantityRowsEmails+";");
+//
+//        int quantityRowsPhones = DBUtils.getNumberRows(dbConnection, "phones");
+//        System.out.println("Количество строк в таблице 'Phones' = " + quantityRowsPhones+";");
+//
+//        int quantityRowsPhoneToContact = DBUtils.getNumberRows(dbConnection, "phonetocontact");
+//        System.out.println("Количество строк в таблице 'PhoneToContact' = " + quantityRowsPhoneToContact+";");
 
 
         if (dbConnection != null) {

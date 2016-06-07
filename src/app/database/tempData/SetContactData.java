@@ -1,6 +1,9 @@
 package app.database.tempData;
 
 
+import app.database.connection.DBUtils;
+
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,10 +22,10 @@ public class SetContactData {
     static String country;
     static String city;
     static String street;
-    static Integer houseNumber;
+    static String houseNumber;
     static String houseSuffix;
-    static Integer apartment;
-    static Integer postCode;
+    static String  apartment;
+    static String postCode;
 
     static List<String> phones = new ArrayList<>();
     static List<String> emails = new ArrayList<>();
@@ -30,7 +33,7 @@ public class SetContactData {
     //static String photoPath;
     static Date birthday;
 
-    public static void main(String[] args) {
+    public static String manualInputData(Connection dbConnection) {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Введите имя контакта");
@@ -63,19 +66,19 @@ public class SetContactData {
 
         in = new Scanner(System.in);
         System.out.println("Введите номер дома");
-        houseNumber = in.nextInt();
+        houseNumber = in.nextLine();
 
         in = new Scanner(System.in);
-        System.out.println("Введите суффикс (если есть, если нет пробел)");
+        System.out.println("Введите суффикс (если есть, если нет 'Enter')");
         houseSuffix = in.nextLine();
 
         in = new Scanner(System.in);
         System.out.println("Введите номер квартиры");
-        apartment = in.nextInt();
+        apartment = in.nextLine();
 
         in = new Scanner(System.in);
         System.out.println("Введите почтовый индекс");
-        postCode = in.nextInt();
+        postCode = in.nextLine();
 
         in = new Scanner(System.in);
         while (true) {
@@ -101,10 +104,22 @@ public class SetContactData {
             }
         }
 
-        System.out.println("contact name: " + firstName + " " + lastName);
-        System.out.println("date of birth: " + date);
-        System.out.println("address: " + country + ", city " + city + ", street " + street + ", house " + houseNumber + " " + houseSuffix + ", app " + apartment);
-        System.out.println("phones: " + phones);
-        System.out.println("e-mails: " + emails);
+//        System.out.println("contact name: " + firstName + " " + lastName);
+//        System.out.println("date of birth: " + date);
+//        System.out.println("address: " + country + ", city " + city + ", street " + street + ", house " + houseNumber + " " + houseSuffix + ", app " + apartment);
+//        System.out.println("phones: " + phones);
+//        System.out.println("e-mails: " + emails);
+
+        String idAddress = String.valueOf(DBUtils.getNumberRows(dbConnection, "address")+1);
+
+        String address = "INSERT INTO address VALUES ('"+ idAddress + "','" + country + "','" + city + "','" + street + "','" + houseNumber + "','" + houseSuffix+"','"+apartment+"','"+postCode+"');";
+
+        return address;
     }
+//    public static String addToTable(String info) {
+
+
+//        return resultString;
+//    }
+
 }
