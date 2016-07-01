@@ -121,7 +121,7 @@ public class DBUtils {
         return (quantityRows);
     }
 
-    public static void addContact(Connection dbConnection){
+    public static void addContact(Connection dbConnection) {
         System.out.println("Введите способ ввода данных (1 - с клавиатуры, 2 - из файла)");
         Scanner in = new Scanner(System.in);
         int how = in.nextInt();

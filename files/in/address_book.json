@@ -2,22 +2,25 @@
   "type":"contact",
   "properties": {
     "id": 0,
-    "firstName": "Иван",
-    "lastName": "Иванов",
-    "foto": "",
-    "birthday": "1980-11-30",
-    "email": "jjkjb@gmail.com",
+    "firstName": "Alex",
+    "lastName": "Bond",
+    "foto": "Path",
+    "birthday": "1975-09-10",
+    "email": [
+      "alexe23b@gmail.com",
+      "e23b@mail.ru"
+      ]
     "address": {
-      "country": "Украина",
-      "city": "Харьков",
-      "street": "Московское шоссе",
-      "houseNumber": "101",
-      "houseSuffix": "Б",
-      "apartment": "101",
-      "postalCode": 30485
+      "country": "Ukraine",
+      "city": "Pisochin",
+      "street": "Komarova lane",
+      "houseNumber": "45",
+      "houseSuffix": " ",
+      "apartment": "45",
+      "postalCode": 62418
     },
     "phoneNumbers": [
-      "093 123-1234",
+      "050 636-1645",
       "096 123-4567"
     ]
   }

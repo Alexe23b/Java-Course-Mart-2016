@@ -2,11 +2,9 @@ package parse.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.*;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class GsonMain {
 
     public static void main(String[] args) throws IOException {
 
-        String path = "parsefiles/messages.json";
+        String path = "files/in/messages.json";
 
         List<Message> messages = readJsonStream(new FileInputStream(path));
 

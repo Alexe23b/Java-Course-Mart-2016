@@ -1,14 +1,14 @@
 [
   {
     "type": "My Type 1",
-    "message": "My Type 1 My Type 1 My Type 1 My Type 1 My Type 1 Message 1"
+    "message": "My Type 1 My Type 1 My Type 1 Message 1"
   },
   {
     "type": "My Type 2",
-    "message": "My Type 2 My Type 2 My Type 2 My Type 2 My Type 2 Message 2"
+    "message": "My Type 2 My Type 2 My Type 2 Message 2"
   },
   {
     "type": "My Type 3",
-    "message": "My Type 3 My Type 3 My Type 3 My Type 3 My Type 3 Message 3"
+    "message": "My Type 3 My Type 3 My Type 3 Message 3"
   }
 ]
